@@ -1,0 +1,78 @@
+--Reformat the table from multiple column and join it with union to make it in 1 column
+--Column 1
+SELECT 
+    item_id,
+    test_a AS test_assignment,
+--Using Case to filter the Null Data
+       (CASE
+            WHEN test_a IS NOT NULL then 'Category_1'
+            ELSE NULL
+        END) AS test_number,
+--Convert from string to timestamp
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
+
+UNION
+
+--Column 2
+SELECT 
+    item_id,
+    test_b AS test_assignment,
+       (CASE
+            WHEN test_b IS NOT NULL then 'Category_2'
+            ELSE NULL
+        END) AS test_number,
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
+
+UNION
+
+--Column 3
+SELECT 
+    item_id,
+    test_c AS test_assignment,
+       (CASE
+            WHEN test_c IS NOT NULL then 'Category_3'
+            ELSE NULL
+        END) AS test_number,
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
+
+UNION
+
+--Column 4
+SELECT 
+    item_id,
+    test_d AS test_assignment,
+       (CASE
+            WHEN test_d IS NOT NULL then 'Category_4'
+            ELSE NULL
+        END) AS test_number,
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
+
+UNION
+
+--Column 5
+SELECT 
+    item_id,
+    test_e AS test_assignment,
+       (CASE
+            WHEN test_e IS NOT NULL then 'Category_5'
+            ELSE NULL
+        END) AS test_number,
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
+
+UNION
+
+--Column 6
+SELECT 
+    item_id,
+    test_f AS test_assignment,
+       (CASE
+            WHEN test_f IS NOT NULL then 'Category_6'
+            ELSE NULL
+        END) AS test_number,
+    CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM DatabaseName.TableName
