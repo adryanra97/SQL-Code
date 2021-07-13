@@ -1,0 +1,35 @@
+--Review Total of review in each city
+
+SELECT city, SUM(review_count) AS counts
+FROM business
+GROUP BY city
+ORDER BY counts DESC
+
+--Check the top 3 user for reviewing
+	
+SELECT id, name, review
+FROM user
+ORDER BY review DESC
+LIMIT 3	
+
+--Showing Data between 2 group of star review in Las Vegas
+
+SELECT 
+	B.name, B.review_count,H.hours,postal_code,
+CASE
+	WHEN B.stars BETWEEN 2 AND 3 THEN '2-3 stars'
+	WHEN B.stars BETWEEN 4 AND 5 THEN '4-5 stars'
+	END AS rating
+FROM 
+	(business B INNER JOIN hours H ON B.id = H.business_id)
+		INNER JOIN 
+			category C ON C.business_id = B.id
+		WHERE (B.city == 'Las Vegas'
+		AND
+		C.category LIKE 'shopping')
+		AND
+		(B.stars BETWEEN 2 AND 3
+		OR
+		B.stars BETWEEN 4 AND 5)
+GROUP BY rating
+ORDER BY rating DESC
