@@ -76,3 +76,32 @@ SELECT
         END) AS test_number,
     CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
 FROM DatabaseName.TableName
+
+
+
+
+--Analyse the Data test_assignment by filter it with order within 30 day or not and total order
+SELECT 
+  od.test_assignment,
+  COUNT(DISTINCT od.item_id) AS Count_Order,
+  SUM(od.Order_in_30d) AS Order_in_30d
+FROM
+  (SELECT 
+      f.item_id,
+      f.test_assignment,
+      MAX(CASE
+        WHEN (DATE(o.created_at)-DATE(f.test_start_date)) BETWEEN 1 AND 30 THEN 1
+        ELSE 0
+        END) AS Order_in_30d
+  FROM DatabaseName.TableName f
+  LEFT JOIN 
+      DatabaseName.orders o
+  ON 
+      f.item_id=o.item_id
+  WHERE 
+      f.test_number='item_test_2'
+   GROUP BY 
+      f.item_id, f.test_assignment
+    ) AS od
+GROUP BY od.test_assignment
+
